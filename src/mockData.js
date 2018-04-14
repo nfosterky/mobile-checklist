@@ -17,13 +17,13 @@ export default {
     ],
     573: [
       {
-        id: 98,
+        id: 103,
         title: 'Wash laundry',
         done: true,
-        sublist: 573
+        sublist: null
       },
       {
-        id: 99,
+        id: 992,
         title: 'Dry laundry',
         done: false,
         sublist: null
