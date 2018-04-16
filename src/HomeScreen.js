@@ -4,6 +4,8 @@ import { View, Text, Button, FlatList, TextInput } from 'react-native';
 import styles from './styles';
 import mockData from './mockData';
 
+import CheckItem from './CheckItem';
+
 export default class HomeScreen extends React.Component {
   static navigationOptions = ({navigation}) => {
     let title = 'Home';
@@ -30,12 +32,22 @@ export default class HomeScreen extends React.Component {
     }
 
     this.addItem = this.addItem.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
     this.navigate = this.navigate.bind(this);
   }
 
   addItem() {
+    const newItem = new CheckItem(this.state.newItemInput);
+
     this.setState({
-      addNewItem
+      data: [ ...this.state.data, newItem ],
+      newItemInput: ''
+    })
+  }
+
+  handleInputChange(newText) {
+    this.setState({
+      newItemInput: newText
     })
   }
 
@@ -58,7 +70,12 @@ export default class HomeScreen extends React.Component {
           }
         />
         <View style={styles.addItem}>
-          <TextInput style={styles.addItemInput} placeholder="Add Item" value={this.state.newItemInput} />
+          <TextInput 
+            style={styles.addItemInput} 
+            placeholder="Add Item" 
+            value={this.state.newItemInput} 
+            onChangeText={this.handleInputChange} />
+
           <Button style={styles.addItemButton} onPress={this.addItem} title="Save" />
         </View>
       </View>
