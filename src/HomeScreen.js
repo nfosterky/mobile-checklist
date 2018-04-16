@@ -19,15 +19,12 @@ export default class HomeScreen extends React.Component {
 
   constructor({navigation}) {
     super();
+    const checklist = navigation.state.params;
 
-    let data = mockData.checklists[mockData.main];
-
-    if (navigation.state.params) {
-      data = mockData.checklists[navigation.state.params.sublist]
-    }
+    this.id = checklist ? checklist.sublist : mockData.main;
 
     this.state = { 
-      data,
+      data: mockData.checklists[this.id],
       newItemInput: ''
     }
 
@@ -44,6 +41,8 @@ export default class HomeScreen extends React.Component {
         data: [ ...this.state.data, newItem ],
         newItemInput: ''
       })
+
+      mockData.checklists[this.id].push(newItem);
     }
   }
 
