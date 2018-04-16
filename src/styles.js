@@ -18,6 +18,18 @@ export default StyleSheet.create({
     color: '#333333',
     marginBottom: 5,
   },
+  addItem: {
+    flexDirection: 'row',
+  },
+  addItemInput: {
+    backgroundColor: '#BBBBBB',
+    fontSize: 18,
+    padding: 5,
+    flex: 1
+  },
+  addItemButton: {
+    flex: 1
+  },
   item: {
     padding: 10,
     fontSize: 18,

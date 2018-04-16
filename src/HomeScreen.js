@@ -1,12 +1,11 @@
 import React from 'react';
-import { View, Text, Button, FlatList } from 'react-native';
+import { View, Text, Button, FlatList, TextInput } from 'react-native';
 
 import styles from './styles';
 import mockData from './mockData';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = ({navigation}) => {
-    console.warn(JSON.stringify(navigation.state))
     let title = 'Home';
 
     if (navigation.state.params) {
@@ -23,17 +22,21 @@ export default class HomeScreen extends React.Component {
 
     if (navigation.state.params) {
       data = mockData.checklists[navigation.state.params.sublist]
-      console.warn(navigation.state.params.sublist)
     }
 
-    this.state = { data }
+    this.state = { 
+      data,
+      newItemInput: ''
+    }
 
     this.addItem = this.addItem.bind(this);
     this.navigate = this.navigate.bind(this);
   }
 
   addItem() {
-    console.warn('add item');
+    this.setState({
+      addNewItem
+    })
   }
 
   navigate(item) {
@@ -46,7 +49,7 @@ export default class HomeScreen extends React.Component {
         <FlatList
           data={this.state.data}
           renderItem={ ({item}) => (
-            <Text 
+            <Text
               style={styles.item} 
               onPress={ () => this.navigate(item) } >
               {item.title}
@@ -54,7 +57,10 @@ export default class HomeScreen extends React.Component {
           )
           }
         />
-        <Button onPress={this.addItem} title="Add Item" />
+        <View style={styles.addItem}>
+          <TextInput style={styles.addItemInput} placeholder="Add Item" value={this.state.newItemInput} />
+          <Button style={styles.addItemButton} onPress={this.addItem} title="Save" />
+        </View>
       </View>
     );
   }
