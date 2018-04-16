@@ -37,12 +37,14 @@ export default class HomeScreen extends React.Component {
   }
 
   addItem() {
-    const newItem = new CheckItem(this.state.newItemInput);
+    if (this.state.newItemInput) {
+      const newItem = new CheckItem(this.state.newItemInput);
 
-    this.setState({
-      data: [ ...this.state.data, newItem ],
-      newItemInput: ''
-    })
+      this.setState({
+        data: [ ...this.state.data, newItem ],
+        newItemInput: ''
+      })
+    }
   }
 
   handleInputChange(newText) {
