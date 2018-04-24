@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, FlatList, TextInput } from 'react-native';
+import { View, Text, Button, FlatList, TextInput, Switch } from 'react-native';
 
 import styles from './styles';
 import mockData from './mockData';
@@ -52,6 +52,18 @@ export default class HomeScreen extends React.Component {
     })
   }
 
+  handleSwitchChange(changedItem, newValue) {
+    const { data } = this.state;
+    const newData = data.map( item => {
+      if (item === changedItem) {
+        item.done = newValue;
+      }
+      return item;
+    })
+
+    this.setState({ data: newData })
+  }
+
   navigate(item) {
     this.props.navigation.navigate('Home', item)
   }
@@ -62,11 +74,18 @@ export default class HomeScreen extends React.Component {
         <FlatList
           data={this.state.data}
           renderItem={ ({item}) => (
-            <Text
-              style={styles.item} 
-              onPress={ () => this.navigate(item) } >
-              {item.title}
-            </Text>
+            <View styles={styles.listItem} >
+              <Switch value={item.done} onValueChange={ isChecked => this.handleSwitchChange(item, isChecked) }/>
+              <Text
+                style={styles.listItemTitle} 
+                onPress={ () => this.navigate(item) } >
+                {item.title}
+
+              { 
+                // item.sublist && ' - ' + mockData.checklists[item.sublist].length
+              }
+              </Text>
+            </View>
           )
           }
         />
