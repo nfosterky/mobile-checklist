@@ -72,10 +72,14 @@ export default class HomeScreen extends React.Component {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <FlatList
+          contentContainerStyle={styles.flatList}
           data={this.state.data}
           renderItem={ ({item}) => (
-            <View styles={styles.listItem} >
-              <Switch value={item.done} onValueChange={ isChecked => this.handleSwitchChange(item, isChecked) }/>
+            <View style={styles.listItem} >
+              <Switch 
+                value={item.done} 
+                onValueChange={ isChecked => this.handleSwitchChange(item, isChecked) }/>
+
               <Text
                 style={styles.listItemTitle} 
                 onPress={ () => this.navigate(item) } >

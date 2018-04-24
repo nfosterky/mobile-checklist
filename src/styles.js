@@ -1,5 +1,7 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+const window = Dimensions.get('window');
 
 export default StyleSheet.create({
   container: {
@@ -8,15 +10,21 @@ export default StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  flatList: {
+    width: window.width
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  listItem: {
+    flexDirection: 'row',
+    justifyContent: 'center'
+  },
+  listItemTitle: {
+    flex: 1,
+    padding: 10,
+    fontSize: 18,
+    height: 44
+  },
+  listItemSwitch: {
+    flex: 1
   },
   addItem: {
     flexDirection: 'row',
@@ -29,10 +37,5 @@ export default StyleSheet.create({
   },
   addItemButton: {
     flex: 1
-  },
-  item: {
-    padding: 10,
-    fontSize: 18,
-    height: 44
   },
 });
