@@ -23,14 +23,22 @@ export default class HomeScreen extends React.Component {
 
     this.id = checklist ? checklist.sublist : mockData.main;
 
-    this.state = { 
-      data: mockData.checklists[this.id],
+    const data = this.getData(this.id);
+
+    this.state = {
+      data: data,
       newItemInput: ''
     }
 
     this.addItem = this.addItem.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.navigate = this.navigate.bind(this);
+  }
+
+  getData(id) {
+    const checklist = mockData.checklists[id] || []; 
+
+    return checklist.map( id => mockData.items[id] );
   }
 
   addItem() {
@@ -64,6 +72,14 @@ export default class HomeScreen extends React.Component {
     this.setState({ data: newData })
   }
 
+  copyList(item) {
+    const duplicate = Object.assign({}, item, {key: 9999});
+
+    this.setState({
+      data: [ ...this.state.data, duplicate ],
+    })
+  }
+
   navigate(item) {
     this.props.navigation.navigate('Home', item)
   }
@@ -84,11 +100,9 @@ export default class HomeScreen extends React.Component {
                 style={styles.listItemTitle} 
                 onPress={ () => this.navigate(item) } >
                 {item.title}
-
-              { 
-                // item.sublist && ' - ' + mockData.checklists[item.sublist].length
-              }
               </Text>
+
+              <Button onPress={ () => this.copyList(item) } title="Copy" />
             </View>
           )
           }

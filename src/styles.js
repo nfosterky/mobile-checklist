@@ -14,6 +14,7 @@ export default StyleSheet.create({
     width: window.width
   },
   listItem: {
+    padding: 5,
     flexDirection: 'row',
     justifyContent: 'center'
   },
